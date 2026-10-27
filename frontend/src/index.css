@@ -1,0 +1,683 @@
+* { box-sizing: border-box; }
+
+.privacy-consent { line-height: 1.6; }
+.privacy-consent h3 { margin-bottom: 0.4rem; }
+.privacy-consent ul { margin-top: 0; padding-left: 1.5rem; }
+.consent-checkbox { display: flex; align-items: flex-start; gap: 0.65rem; margin: 1.25rem 0; }
+.consent-checkbox input { flex-shrink: 0; margin-top: 0.4rem; }
+.consent-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f6fb;
+  color: #1a1f2b;
+}
+
+.app-shell {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  margin-bottom: 0.25rem;
+  color: #2b3a67;
+}
+
+.subtitle {
+  color: #667;
+  margin: 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 20px rgba(30, 40, 80, 0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.hint {
+  color: #5a6270;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+input[type="file"] {
+  padding: 0.5rem;
+  border: 1px dashed #b6c0d9;
+  border-radius: 8px;
+  background: #f9fafc;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d5dae5;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.primary-btn {
+  background: #3454d1;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.primary-btn:hover:not(:disabled) { background: #2a41ab; }
+.primary-btn:disabled { background: #a9b4d6; cursor: not-allowed; }
+
+.secondary-btn {
+  background: #eef1fb;
+  color: #2b3a67;
+  border: 1px solid #c9d2ef;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.secondary-btn.small { padding: 0.35rem 0.75rem; font-size: 0.85rem; margin: 0.5rem 0 1rem; }
+.secondary-btn.recording { background: #ffe3e3; border-color: #f2a9a9; color: #a11d1d; }
+
+.quit-interview-btn {
+  width: 100%;
+  margin-top: 0.75rem;
+  color: #a11d1d;
+  border-color: #e9aaaa;
+  background: #fff5f5;
+}
+
+.proctor-modal-overlay.quit-confirmation { z-index: 2200; }
+
+.file-chip {
+  background: #eef7ee;
+  color: #2c6b2c;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+.error-text {
+  color: #c0392b;
+  font-size: 0.9rem;
+}
+
+.interview-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #eef1fb;
+  color: #2b3a67;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.topic-badge { background: #fff4e0; color: #8a5a00; }
+
+.timer {
+  margin-left: auto;
+  font-weight: 600;
+  color: #2b3a67;
+}
+
+.question-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #1a1f2b;
+}
+
+/* Used on the question text / last-answer transcript so selection can't
+   even start (defense in depth alongside the onCopy/onCut handlers, which
+   are what actually stop the clipboard). */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.clipboard-notice {
+  background: #fff4e0;
+  border-left: 3px solid #e0a800;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #7a5200;
+  margin: 0.5rem 0;
+}
+
+
+.transcript-preview {
+  background: #f7f8fc;
+  border-left: 3px solid #3454d1;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.answer-section {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.answer-section label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.answer-section textarea.listening {
+  border-color: #e0a800;
+  box-shadow: 0 0 0 2px rgba(224, 168, 0, 0.15);
+}
+
+.overall-score {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3454d1;
+  display: block;
+}
+
+.score-label {
+  color: #667;
+  font-size: 0.9rem;
+}
+
+.recommendation-badge {
+  text-align: center;
+  font-weight: 700;
+  color: #2c6b2c;
+  background: #eef7ee;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.score-list {
+  list-style: none;
+  padding: 0;
+}
+
+.score-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  text-transform: capitalize;
+}
+
+/* Proctoring Styles */
+.proctor-wrapper {
+  position: relative;
+}
+
+.proctor-status-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.proctor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: #f0f2f5;
+  color: #4b5563;
+}
+
+.proctor-badge.active {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.proctor-badge.warning {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.proctor-security-check h2 {
+  margin-bottom: 0.5rem;
+}
+
+.proctor-check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+}
+
+.proctor-check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #f9fafb;
+}
+
+.proctor-check.ok {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.proctor-check.fail {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.proctor-check.pending {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.proctor-check-icon {
+  font-weight: 700;
+  width: 1.25rem;
+  text-align: center;
+}
+
+.proctor-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.proctor-terminated {
+  border-top: 4px solid #dc2626;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.proctor-terminated h2 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+/* Violation Warning Modal */
+.proctor-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 40, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Above .proctor-lockdown-overlay (2000) — a WARN/FINAL_WARN modal must
+     always be visible even when the lockdown screen is also up (both can
+     be triggered by the same blur/fullscreen-exit event), otherwise the
+     candidate never sees the violation count and the flow looks broken. */
+  z-index: 2100;
+  backdrop-filter: blur(4px);
+  padding: 1rem;
+}
+
+.proctor-modal {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.proctor-modal h3 {
+  color: #d97706;
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.proctor-modal.proctor-modal-final h3 {
+  color: #dc2626;
+}
+
+.proctor-violation-count {
+  font-weight: 700;
+  color: #dc2626;
+  margin: 1rem 0;
+  font-size: 1.05rem;
+}
+
+.proctor-lockdown-overlay {
+  position: fixed;
+  inset: 0;
+  background: #14182b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* below .proctor-modal-overlay (2100), so a WARN/
+                     FINAL_WARN modal always shows on top of this */
+  padding: 1rem;
+}
+
+.proctor-lockdown-box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.75rem;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(20, 24, 40, 0.35);
+  text-align: center;
+}
+
+.proctor-lockdown-box h3 {
+  color: #c0392b;
+  margin-top: 0;
+}
+
+.malpractice-flag {
+  background: #fdecea;
+  border: 1px solid #f3b7b0;
+  color: #c0392b;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.camera-preview {
+  width: min(100%, 280px);
+  margin: 0 0 1rem auto;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #f8fafc;
+}
+.camera-preview-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+}
+.camera-preview video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+.camera-preview p { margin: 0; padding: 0.6rem 0.8rem; font-size: 0.8rem; }
+
+/* Voice Baseline and Verification Styles */
+.voice-baseline-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.voice-baseline-box h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  color: #1e293b;
+  font-size: 1.05rem;
+}
+
+.baseline-quote {
+  background: #ffffff;
+  border-left: 4px solid #3454d1;
+  padding: 0.85rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #334155;
+  font-style: italic;
+  margin: 0.75rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.voice-progress-container {
+  background: #e2e8f0;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+  margin: 0.85rem 0 0.4rem;
+  position: relative;
+}
+
+.voice-progress-bar {
+  background: #3454d1;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.1s linear;
+}
+
+.voice-progress-timer {
+  display: block;
+  font-size: 0.85rem;
+  color: #475569;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+.baseline-btn-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.proctor-check.recording {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.proctor-check-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.proctor-check-detail {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+/* Voice Review Banner in Report */
+.voice-review-banner {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  padding: 0.85rem 1.1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.voice-mismatch-audit {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.voice-audit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+}
+
+.voice-audit-item {
+  padding: 0.4rem 0;
+  font-size: 0.88rem;
+  color: #475569;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.voice-audit-item:last-child {
+  border-bottom: none;
+}
+
+.flag-tag {
+  background: #fef2f2;
+  color: #dc2626;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #fecaca;
+  font-size: 0.8rem;
+}
+
+.similarity-tag {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+/* Role selection screen */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.role-card {
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+.role-card:hover {
+  border-color: #888;
+}
+.role-card-selected {
+  border-color: #2f6fed;
+  background: #eef4ff;
+}
+
+/* Interview Type Selection (Type 1 vs Type 2) */
+.type-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.type-card {
+  position: relative;
+  padding: 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.type-card:hover {
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.type-card-selected {
+  border-color: #2563eb;
+  background: #f0f7ff;
+  box-shadow: 0 0 0 1px #2563eb, 0 4px 14px rgba(37, 99, 235, 0.12);
+}
+
+.type-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.type-card-selected .type-badge {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.type-title {
+  margin: 0.25rem 0 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.type-description {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.type-confirmation-box {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+

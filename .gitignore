@@ -1,0 +1,38 @@
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Uploaded files / recordings
+uploads/
+recordings/
+audio/
+temp/
+tmp/
+
+# Secret files
+*.pem
+*.key
